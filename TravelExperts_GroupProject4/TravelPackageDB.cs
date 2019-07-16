@@ -71,47 +71,33 @@ namespace TravelExperts_GroupProject4
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 using (sqlDataAdapter)
                 {
-                    if (listbox.SelectedItems == null)
-                    {
-                        sqlCommand.Parameters.AddWithValue("@PackageId", DBNull.Value);
-                    }
-                    else
+                    if (listbox.SelectedItems.Count > 0)
                     {
                         sqlCommand.Parameters.AddWithValue("@PackageId", listbox.Items.IndexOf(listbox.SelectedItems[0]));
-                    }      
 
-                    DataTable OrderDataTable = new DataTable();
-                    sqlDataAdapter.Fill(OrderDataTable);
+                        DataTable OrderDataTable = new DataTable();
+                        sqlDataAdapter.Fill(OrderDataTable);
 
-                    if (OrderDataTable.Rows.Count >= 0)
-                    {
                         // variables
+                        string pkgName = Convert.ToString(OrderDataTable.Rows[0]["PackageId"]);
+                        string pkgDesc = Convert.ToString(OrderDataTable.Rows[0]["PkgDesc"]);
                         DateTime startDate = Convert.ToDateTime(OrderDataTable.Rows[0]["PkgStartDate"]);
                         DateTime endDate = Convert.ToDateTime(OrderDataTable.Rows[0]["PkgEndDate"]);
                         double pkgPrice = Convert.ToDouble(OrderDataTable.Rows[0]["PkgBasePrice"]);
                         double pkgComm = Convert.ToDouble(OrderDataTable.Rows[0]["PkgAgencyCommission"]);
-                   
-                        packageName.Text = OrderDataTable.Rows[0]["PackageId"].ToString();
+
+                        packageName.Text = pkgName;
                         packageStartDate.Text = startDate.ToString("MM/dd/yyyy");
                         packageEndDate.Text = endDate.ToString("MM/dd/yyyy");
-                        packageDescription.Text = OrderDataTable.Rows[0]["PkgDesc"].ToString();
+                        packageDescription.Text = pkgDesc;
                         packageBasePrice.Text = pkgPrice.ToString("C");
                         packageCommission.Text = pkgComm.ToString("C");
                     }
-                    else
-                    {
-                        packageName.Text = "";
-                        packageStartDate.Text = "";
-                        packageEndDate.Text = "";
-                        packageDescription.Text = "";
-                        packageBasePrice.Text = "";
-                        packageCommission.Text = "";
-                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //throw ex;
+                throw ex;
             }
             finally
             {
