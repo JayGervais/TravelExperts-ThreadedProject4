@@ -39,14 +39,13 @@ namespace TravelExperts_GroupProject4
                     while (reader.Read())
                     {
                         var item = new ListViewItem();
-                        item.Text = reader["PackageId"].ToString();
-
                         // variables
                         DateTime startDate = Convert.ToDateTime(reader["PkgStartDate"]);
                         DateTime endDate = Convert.ToDateTime(reader["PkgEndDate"]);
                         double basePrice = Convert.ToDouble(reader["PkgBasePrice"]);
                         double agencyCommission = Convert.ToDouble(reader["PkgAgencyCommission"]);
 
+                        item.SubItems[0].Text = reader[0].ToString();
                         item.SubItems.Add(reader["PkgName"].ToString());
                         item.SubItems.Add(startDate.ToString("MM/dd/yyyy"));
                         item.SubItems.Add(endDate.ToString("MM/dd/yyyy"));
@@ -60,7 +59,7 @@ namespace TravelExperts_GroupProject4
             return packages;
         }
 
-        public void ShowSelectedOrder(ListView listbox, Label packageName, Label packageStartDate, Label packageEndDate, Label packageDescription, Label packageBasePrice, Label packageCommission)
+        public void ShowSelectedOrder(ListView listview, Label packageName, Label packageStartDate, Label packageEndDate, Label packageDescription, Label packageBasePrice, Label packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
             try
@@ -69,17 +68,19 @@ namespace TravelExperts_GroupProject4
 
                 SqlCommand sqlCommand = new SqlCommand(selectPackageQuery, con);
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
                 using (sqlDataAdapter)
                 {
-                    if (listbox.SelectedItems.Count > 0)
+                    if (listview != null && listview.SelectedItems.Count > 0)
                     {
-                        sqlCommand.Parameters.AddWithValue("@PackageId", listbox.Items.IndexOf(listbox.SelectedItems[0]));
+                        sqlCommand.Parameters.AddWithValue("@PackageId", listview.FocusedItem.Text);
 
                         DataTable OrderDataTable = new DataTable();
                         sqlDataAdapter.Fill(OrderDataTable);
 
                         // variables
-                        string pkgName = Convert.ToString(OrderDataTable.Rows[0]["PackageId"]);
+                        string pkgId = Convert.ToString(OrderDataTable.Rows[0]["PackageId"]);
+                        string pkgName = Convert.ToString(OrderDataTable.Rows[0]["PkgName"]);
                         string pkgDesc = Convert.ToString(OrderDataTable.Rows[0]["PkgDesc"]);
                         DateTime startDate = Convert.ToDateTime(OrderDataTable.Rows[0]["PkgStartDate"]);
                         DateTime endDate = Convert.ToDateTime(OrderDataTable.Rows[0]["PkgEndDate"]);
@@ -95,9 +96,9 @@ namespace TravelExperts_GroupProject4
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                //throw ex;
             }
             finally
             {

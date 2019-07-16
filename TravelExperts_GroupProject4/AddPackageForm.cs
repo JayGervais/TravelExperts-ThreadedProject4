@@ -21,8 +21,6 @@ namespace TravelExperts_GroupProject4
         private void AddPackageForm_Load(object sender, EventArgs e)
         {
             List<Package> packageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
-
-
         }
 
         private void LstViewTravelPackages_SelectedIndexChanged(object sender, EventArgs e)
