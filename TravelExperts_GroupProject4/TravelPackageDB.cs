@@ -59,7 +59,7 @@ namespace TravelExperts_GroupProject4
             return packages;
         }
 
-        public void ShowSelectedOrder(ListView listview, Label packageName, Label packageStartDate, Label packageEndDate, Label packageDescription, Label packageBasePrice, Label packageCommission)
+        public void ShowSelectedOrder(ListView listview, Label packageId, Label packageName, Label packageStartDate, Label packageEndDate, Label packageDescription, Label packageBasePrice, Label packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
             try
@@ -87,6 +87,7 @@ namespace TravelExperts_GroupProject4
                         double pkgPrice = Convert.ToDouble(OrderDataTable.Rows[0]["PkgBasePrice"]);
                         double pkgComm = Convert.ToDouble(OrderDataTable.Rows[0]["PkgAgencyCommission"]);
 
+                        packageId.Text = pkgId;
                         packageName.Text = pkgName;
                         packageStartDate.Text = startDate.ToString("MM/dd/yyyy");
                         packageEndDate.Text = endDate.ToString("MM/dd/yyyy");
@@ -106,6 +107,10 @@ namespace TravelExperts_GroupProject4
             }
         }
 
+        public void EditTravelPackage(int packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
+        {
+
+        }
 
 
     }

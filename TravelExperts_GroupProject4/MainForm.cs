@@ -19,7 +19,8 @@ namespace TravelExperts_GroupProject4
 
         private void BtnPackages_Click(object sender, EventArgs e)
         {
-            new AddPackageForm().Show();
+            new TravelPackageForm().Show();
+            Hide();
         }
     }
 }
