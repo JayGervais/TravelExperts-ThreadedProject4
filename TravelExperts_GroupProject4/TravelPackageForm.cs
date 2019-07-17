@@ -71,7 +71,44 @@ namespace TravelExperts_GroupProject4
             string packageBasePrice = lblBasePrice.Text;
             string packageCommission = lblCommission.Text;
 
-            new EditPackageForm(packageId, packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission).Show();
+            EditPackageForm updatePkgForm = new EditPackageForm(packageId, packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission);
+            updatePkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
+            updatePkgForm.Show();
+        }
+
+        private void UpdatePkgForm_FormClosed(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void BtnDeletePackage_Click(object sender, EventArgs e)
+        {
+            string packageName = lblPackageName.Text;
+            DialogResult deleteClient = MessageBox.Show("Are you sure you want to delete the " + packageName + " package?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (deleteClient == DialogResult.Yes)
+            {
+                int packageID = Convert.ToInt32(lblPackageID.Text);
+                TravelPackageDB deletePackage = new TravelPackageDB();
+                   deletePackage.DeleteTravelPackage(lstViewTravelPackages, packageID);
+
+                ClearForm();
+            }
+        }
+
+        private void ClearForm()
+        {
+            lstViewTravelPackages.Clear();
+            List<Package> refreshPackageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
+            ClearLabels();
+            btnEditPackage.Enabled = false;
+            btnDeletePackage.Enabled = false;
+        }
+
+        private void BtnAddPackage_Click(object sender, EventArgs e)
+        {
+            AddPackageForm addPkgForm = new AddPackageForm();
+            addPkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
+            addPkgForm.Show();
         }
     }
 }

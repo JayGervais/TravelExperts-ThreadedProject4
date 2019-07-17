@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddPackageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPackageForm.Designer.cs">
+      <DependentUpon>AddPackageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TravelPackageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
       <DependentUpon>TravelExpertsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="TravelPackageDB.cs" />
+    <EmbeddedResource Include="AddPackageForm.resx">
+      <DependentUpon>AddPackageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TravelPackageForm.resx">
       <DependentUpon>TravelPackageForm.cs</DependentUpon>
     </EmbeddedResource>

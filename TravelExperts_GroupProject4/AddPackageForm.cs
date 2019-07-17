@@ -11,24 +11,16 @@ using System.Windows.Forms;
 
 namespace TravelExperts_GroupProject4
 {
-    public partial class EditPackageForm : Form
+    public partial class AddPackageForm : Form
     {
-        public EditPackageForm(string packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, string packageBasePrice, string packageCommission)
+        public AddPackageForm()
         {
             InitializeComponent();
-
-            txtPackageID.Text = packageId;
-            txtPackageName.Text = packageName;
-            dateStart.Value = packageStartDate;
-            dateEnd.Value = packageEndDate;
-            txtPackageDesc.Text = packageDescription;
-            txtBasePrice.Text = packageBasePrice;
-            txtCommission.Text = packageCommission;
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -37,7 +29,6 @@ namespace TravelExperts_GroupProject4
             string packageBase = Regex.Replace(txtBasePrice.Text, "\\$", "");
             string packageComm = Regex.Replace(txtCommission.Text, "\\$", "");
 
-            int packageId = Convert.ToInt32(txtPackageID.Text);
             string packageName = txtPackageName.Text;
             DateTime packageStartDate = dateStart.Value;
             DateTime packageEndDate = dateEnd.Value;
@@ -46,8 +37,8 @@ namespace TravelExperts_GroupProject4
             double packageCommission = Convert.ToDouble(packageComm);
             try
             {
-                TravelPackageDB updateTravelPackage = new TravelPackageDB();
-                updateTravelPackage.EditTravelPackage(packageId, packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission);
+                TravelPackageDB addNewPackage = new TravelPackageDB();
+                addNewPackage.AddTravelPackage(packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission);
 
                 this.Close();
                 TravelPackageForm refreshFrom = new TravelPackageForm();
@@ -57,7 +48,6 @@ namespace TravelExperts_GroupProject4
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
-
         }
     }
 }

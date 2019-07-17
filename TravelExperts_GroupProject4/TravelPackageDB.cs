@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExpertsData;
@@ -97,9 +98,9 @@ namespace TravelExperts_GroupProject4
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //throw ex;
+                throw ex;
             }
             finally
             {
@@ -109,9 +110,84 @@ namespace TravelExperts_GroupProject4
 
         public void EditTravelPackage(int packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
         {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            try
+            {
+                string updatePkgQuery = @"UPDATE Packages " +
+                                         "SET PkgName = @PackageName, PkgStartDate = @PackageStartDate, PkgEndDate = @PackageEndDate, PkgDesc = @PackageDescription, PkgBasePrice = @PackageBasePrice, PkgAgencyCommission = @PackageCommission " +
+                                         "WHERE PackageId = @PackageId";
 
+                SqlCommand sqlCommand = new SqlCommand(updatePkgQuery, con);
+                con.Open();
+                sqlCommand.Parameters.AddWithValue("@PackageId", packageId);
+                sqlCommand.Parameters.AddWithValue("@PackageName", packageName);
+                sqlCommand.Parameters.AddWithValue("@PackageStartDate", packageStartDate);
+                sqlCommand.Parameters.AddWithValue("@PackageEndDate", packageEndDate);
+                sqlCommand.Parameters.AddWithValue("@PackageDescription", packageDescription);
+                sqlCommand.Parameters.AddWithValue("@PackageBasePrice", packageBasePrice);
+                sqlCommand.Parameters.AddWithValue("@PackageCommission", packageCommission);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
+        public void AddTravelPackage(string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            try
+            {
+                string updatePkgQuery = @"INSERT INTO Packages " +
+                                         "(PkgName, PkgStartDate, PkgEndDate, PkgDesc, PkgBasePrice, PkgAgencyCommission) " +
+                                         "VALUES (@PackageName, @PackageStartDate, @PackageEndDate, @PackageDescription, @PackageBasePrice, @PackageCommission)";
+
+                SqlCommand sqlCommand = new SqlCommand(updatePkgQuery, con);
+                con.Open();
+                sqlCommand.Parameters.AddWithValue("@PackageName", packageName);
+                sqlCommand.Parameters.AddWithValue("@PackageStartDate", packageStartDate);
+                sqlCommand.Parameters.AddWithValue("@PackageEndDate", packageEndDate);
+                sqlCommand.Parameters.AddWithValue("@PackageDescription", packageDescription);
+                sqlCommand.Parameters.AddWithValue("@PackageBasePrice", packageBasePrice);
+                sqlCommand.Parameters.AddWithValue("@PackageCommission", packageCommission);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void DeleteTravelPackage(ListView packageList, int packageID)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            try
+            {
+                string deletePkgQuery = @"DELETE FROM Packages WHERE PackageID = @PackageId";
+                SqlCommand sqlCommand = new SqlCommand(deletePkgQuery, con);
+                con.Open();
+                sqlCommand.Parameters.AddWithValue("@PackageId", packageID);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
     }
 }

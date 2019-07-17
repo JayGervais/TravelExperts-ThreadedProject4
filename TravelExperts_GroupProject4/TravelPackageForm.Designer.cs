@@ -47,6 +47,8 @@
             this.btnDeletePackage = new System.Windows.Forms.Button();
             this.btnAddPackage = new System.Windows.Forms.Button();
             this.lblPackageID = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lstViewTravelPackages
@@ -178,6 +180,7 @@
             // 
             // btnEditPackage
             // 
+            this.btnEditPackage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEditPackage.Location = new System.Drawing.Point(12, 235);
             this.btnEditPackage.Name = "btnEditPackage";
             this.btnEditPackage.Size = new System.Drawing.Size(145, 26);
@@ -194,6 +197,7 @@
             this.btnDeletePackage.TabIndex = 15;
             this.btnDeletePackage.Text = "Delete";
             this.btnDeletePackage.UseVisualStyleBackColor = true;
+            this.btnDeletePackage.Click += new System.EventHandler(this.BtnDeletePackage_Click);
             // 
             // btnAddPackage
             // 
@@ -201,8 +205,9 @@
             this.btnAddPackage.Name = "btnAddPackage";
             this.btnAddPackage.Size = new System.Drawing.Size(145, 26);
             this.btnAddPackage.TabIndex = 16;
-            this.btnAddPackage.Text = "Add New Package";
+            this.btnAddPackage.Text = "Add A Travel Package";
             this.btnAddPackage.UseVisualStyleBackColor = true;
+            this.btnAddPackage.Click += new System.EventHandler(this.BtnAddPackage_Click);
             // 
             // lblPackageID
             // 
@@ -213,7 +218,18 @@
             this.lblPackageID.Size = new System.Drawing.Size(0, 13);
             this.lblPackageID.TabIndex = 17;
             // 
-            // AddPackageForm
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(301, 235);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(255, 215);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
+            // TravelPackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -236,10 +252,12 @@
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.lstViewTravelPackages);
+            this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "AddPackageForm";
+            this.Name = "TravelPackageForm";
             this.Text = "Travel Packages";
             this.Load += new System.EventHandler(this.AddPackageForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +283,6 @@
         private System.Windows.Forms.Button btnDeletePackage;
         private System.Windows.Forms.Button btnAddPackage;
         private System.Windows.Forms.Label lblPackageID;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
