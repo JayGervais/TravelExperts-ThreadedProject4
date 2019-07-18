@@ -73,7 +73,7 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(391, 285);
+            this.labelDate.Location = new System.Drawing.Point(329, 285);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(55, 13);
             this.labelDate.TabIndex = 2;
@@ -100,7 +100,7 @@
             // labelBase
             // 
             this.labelBase.AutoSize = true;
-            this.labelBase.Location = new System.Drawing.Point(391, 347);
+            this.labelBase.Location = new System.Drawing.Point(329, 347);
             this.labelBase.Name = "labelBase";
             this.labelBase.Size = new System.Drawing.Size(58, 13);
             this.labelBase.TabIndex = 5;
@@ -128,7 +128,7 @@
             // 
             this.lblStartDate.AutoSize = true;
             this.lblStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStartDate.Location = new System.Drawing.Point(390, 305);
+            this.lblStartDate.Location = new System.Drawing.Point(458, 305);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(0, 20);
             this.lblStartDate.TabIndex = 8;
@@ -155,7 +155,7 @@
             // 
             this.lblBasePrice.AutoSize = true;
             this.lblBasePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBasePrice.Location = new System.Drawing.Point(390, 365);
+            this.lblBasePrice.Location = new System.Drawing.Point(458, 365);
             this.lblBasePrice.Name = "lblBasePrice";
             this.lblBasePrice.Size = new System.Drawing.Size(0, 20);
             this.lblBasePrice.TabIndex = 11;
@@ -224,7 +224,7 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(294, 234);
+            this.pictureBox1.Location = new System.Drawing.Point(299, 235);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(255, 215);
             this.pictureBox1.TabIndex = 18;
