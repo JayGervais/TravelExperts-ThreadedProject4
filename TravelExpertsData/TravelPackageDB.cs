@@ -7,9 +7,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TravelExpertsData;
-
-namespace TravelExperts_GroupProject4
+/// <summary>
+/// Travel Package DB Query File Created by Jay Gervais
+/// </summary>
+namespace TravelExpertsData
 {
     public class TravelPackageDB
     {
@@ -108,6 +109,40 @@ namespace TravelExperts_GroupProject4
             }
         }
 
+        public static List<Package> GetPackageProducts(ListBox listBox, int packageId)
+        {
+            List<Package> packageProducts = new List<Package>();
+
+            using (SqlConnection con = TravelExpertsDB.GetConnection())
+            {
+                string selectPackProdQuery = @"SELECT ProdName FROM Packages P " +
+                                              "INNER JOIN Packages_Products_Suppliers S ON P.PackageId = S.PackageId " +
+                                              "INNER JOIN Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
+                                              "INNER JOIN Products R ON O.ProductId = R.ProductId " +
+                                              "WHERE R.ProductId = O.ProductId " +
+                                              "AND O.ProductSupplierId = S.ProductSupplierId " +
+                                              "AND S.PackageId = @PackageId";
+
+                using (SqlCommand cmd = new SqlCommand(selectPackProdQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@PackageId", packageId);
+                    con.Open();
+
+                    if (listBox.ValueMember != null)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable prod = new DataTable();
+                        adapter.Fill(prod);
+
+                        listBox.DisplayMember = "ProdName";
+                        listBox.ValueMember = "ProductId";
+                        listBox.DataSource = prod;
+                    }
+                }
+            }
+            return packageProducts;
+        }
+
         public void EditTravelPackage(int packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -189,39 +224,7 @@ namespace TravelExperts_GroupProject4
             }
         }
 
-        public static List<Package> GetPackageProducts(ListBox listBox, int packageId)
-        {
-            List<Package> packageProducts = new List<Package>();
-
-            using (SqlConnection con = TravelExpertsDB.GetConnection())
-            {
-                string selectPackProdQuery = @"SELECT ProdName FROM Packages P " +
-                                              "INNER JOIN Packages_Products_Suppliers S ON P.PackageId = S.PackageId " +
-                                              "INNER JOIN Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
-                                              "INNER JOIN Products R ON O.ProductId = R.ProductId " +
-                                              "WHERE R.ProductId = O.ProductId " +
-                                              "AND O.ProductSupplierId = S.ProductSupplierId " +
-                                              "AND S.PackageId = @PackageId";
-
-                using (SqlCommand cmd = new SqlCommand(selectPackProdQuery, con))
-                {
-                    cmd.Parameters.AddWithValue("@PackageId", packageId);
-                    con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (reader.Read())
-                    {
-                        var item = new ListViewItem();
-
-                        item.SubItems[0].Text = reader["ProdName"].ToString();
-                        item.SubItems.Add(reader["ProdName"].ToString());
-
-                        listBox.Items.Add(item);
-                    }
-                }
-            }
-            return packageProducts;
-        }
+        
 
     }
 }

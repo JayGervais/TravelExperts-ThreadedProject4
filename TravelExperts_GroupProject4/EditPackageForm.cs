@@ -8,7 +8,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using TravelExpertsData;
+/// <summary>
+/// Edit Package Form Created by Jay Gervais
+/// </summary>
 namespace TravelExperts_GroupProject4
 {
     public partial class EditPackageForm : Form

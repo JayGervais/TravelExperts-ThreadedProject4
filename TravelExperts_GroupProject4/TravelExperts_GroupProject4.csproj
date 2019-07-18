@@ -52,7 +52,6 @@
     <Compile Include="AddPackageForm.Designer.cs">
       <DependentUpon>AddPackageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TravelPackageDB.cs" />
     <Compile Include="TravelPackageForm.cs">
       <SubType>Form</SubType>
     </Compile>

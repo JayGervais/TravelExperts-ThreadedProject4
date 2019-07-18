@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExpertsData;
-
+/// <summary>
+/// Travel Package Form Interface Created by Jay Gervais
+/// </summary>
 namespace TravelExperts_GroupProject4
 {
     public partial class TravelPackageForm : Form
@@ -34,8 +36,11 @@ namespace TravelExperts_GroupProject4
             btnEditPackage.Enabled = true;
             btnDeletePackage.Enabled = true;
 
-            int packageId = Convert.ToInt32(lblPackageID.Text);
-            List<Package> packageProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+            if (lstProducts.Items != null)
+            {
+                int packageId = Convert.ToInt32(lblPackageID.Text);
+                List<Package> packageProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+            } 
         }
 
         private void ClearLabels()
