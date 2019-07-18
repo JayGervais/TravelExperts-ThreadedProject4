@@ -233,7 +233,7 @@
             // lstProducts
             // 
             this.lstProducts.FormattingEnabled = true;
-            this.lstProducts.Location = new System.Drawing.Point(643, 290);
+            this.lstProducts.Location = new System.Drawing.Point(643, 285);
             this.lstProducts.Name = "lstProducts";
             this.lstProducts.Size = new System.Drawing.Size(145, 95);
             this.lstProducts.TabIndex = 19;
