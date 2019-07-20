@@ -49,6 +49,8 @@
             this.lblPackageID = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lstProducts = new System.Windows.Forms.ListBox();
+            this.lblPackages = new System.Windows.Forms.Label();
+            this.btnEditProducts = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,7 +173,7 @@
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(643, 412);
+            this.btnGoBack.Location = new System.Drawing.Point(25, 405);
             this.btnGoBack.Name = "btnGoBack";
             this.btnGoBack.Size = new System.Drawing.Size(145, 26);
             this.btnGoBack.TabIndex = 13;
@@ -214,7 +216,7 @@
             // 
             this.lblPackageID.AutoSize = true;
             this.lblPackageID.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lblPackageID.Location = new System.Drawing.Point(22, 412);
+            this.lblPackageID.Location = new System.Drawing.Point(109, 285);
             this.lblPackageID.Name = "lblPackageID";
             this.lblPackageID.Size = new System.Drawing.Size(0, 13);
             this.lblPackageID.TabIndex = 17;
@@ -233,16 +235,38 @@
             // lstProducts
             // 
             this.lstProducts.FormattingEnabled = true;
-            this.lstProducts.Location = new System.Drawing.Point(643, 285);
+            this.lstProducts.Location = new System.Drawing.Point(643, 305);
             this.lstProducts.Name = "lstProducts";
+            this.lstProducts.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lstProducts.Size = new System.Drawing.Size(145, 95);
             this.lstProducts.TabIndex = 19;
+            // 
+            // lblPackages
+            // 
+            this.lblPackages.AutoSize = true;
+            this.lblPackages.Location = new System.Drawing.Point(640, 285);
+            this.lblPackages.Name = "lblPackages";
+            this.lblPackages.Size = new System.Drawing.Size(49, 13);
+            this.lblPackages.TabIndex = 20;
+            this.lblPackages.Text = "Products";
+            // 
+            // btnEditProducts
+            // 
+            this.btnEditProducts.Location = new System.Drawing.Point(643, 405);
+            this.btnEditProducts.Name = "btnEditProducts";
+            this.btnEditProducts.Size = new System.Drawing.Size(145, 26);
+            this.btnEditProducts.TabIndex = 21;
+            this.btnEditProducts.Text = "Edit Products";
+            this.btnEditProducts.UseVisualStyleBackColor = true;
+            this.btnEditProducts.Click += new System.EventHandler(this.BtnAddProduct_Click);
             // 
             // TravelPackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnEditProducts);
+            this.Controls.Add(this.lblPackages);
             this.Controls.Add(this.lstProducts);
             this.Controls.Add(this.lblPackageID);
             this.Controls.Add(this.btnAddPackage);
@@ -295,5 +319,7 @@
         private System.Windows.Forms.Label lblPackageID;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListBox lstProducts;
+        private System.Windows.Forms.Label lblPackages;
+        private System.Windows.Forms.Button btnEditProducts;
     }
 }

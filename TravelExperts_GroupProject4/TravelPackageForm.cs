@@ -26,6 +26,8 @@ namespace TravelExperts_GroupProject4
             ClearLabels();
             btnEditPackage.Enabled = false;
             btnDeletePackage.Enabled = false;
+            lstProducts.Enabled = false;
+            btnEditProducts.Enabled = false;
         }
 
         private void LstViewTravelPackages_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,12 +37,71 @@ namespace TravelExperts_GroupProject4
             ShowLabels();
             btnEditPackage.Enabled = true;
             btnDeletePackage.Enabled = true;
+            lstProducts.Enabled = true;
+            btnEditProducts.Enabled = true;
 
             if (lstProducts.Items != null)
             {
                 int packageId = Convert.ToInt32(lblPackageID.Text);
                 List<Package> packageProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
             } 
+        }
+
+        private void BtnAddPackage_Click(object sender, EventArgs e)
+        {
+            AddPackageForm addPkgForm = new AddPackageForm();
+            addPkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
+            addPkgForm.Show();
+        }
+
+        private void BtnAddProduct_Click(object sender, EventArgs e)
+        {
+            int packageId = Convert.ToInt32(lblPackageID.Text);
+            AddProductForm addProdToPack = new AddProductForm(packageId, lblPackageName.Text);
+            addProdToPack.Show();
+        }
+
+        private void BtnEditPackage_Click(object sender, EventArgs e)
+        {
+            string packageId = lblPackageID.Text;
+            string packageName = lblPackageName.Text;
+            DateTime packageStartDate = Convert.ToDateTime(lblStartDate.Text);
+            DateTime packageEndDate = Convert.ToDateTime(lblEndDate.Text);
+            string packageDescription = lblDescription.Text;
+            string packageBasePrice = lblBasePrice.Text;
+            string packageCommission = lblCommission.Text;
+
+            EditPackageForm updatePkgForm = new EditPackageForm(packageId, packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission);
+            updatePkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
+            updatePkgForm.Show();
+        }
+
+        private void BtnDeletePackage_Click(object sender, EventArgs e)
+        {
+            string packageName = lblPackageName.Text;
+            DialogResult deleteClient = MessageBox.Show("Are you sure you want to delete the " + packageName + " package?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (deleteClient == DialogResult.Yes)
+            {
+                int packageID = Convert.ToInt32(lblPackageID.Text);
+                TravelPackageDB deletePackage = new TravelPackageDB();
+                deletePackage.DeleteTravelPackage(lstViewTravelPackages, packageID);
+
+                ClearForm();
+            }
+        }
+
+        private void UpdatePkgForm_FormClosed(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            lstViewTravelPackages.Clear();
+            List<Package> refreshPackageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
+            ClearLabels();
+            btnEditPackage.Enabled = false;
+            btnDeletePackage.Enabled = false;
         }
 
         private void ClearLabels()
@@ -73,56 +134,6 @@ namespace TravelExperts_GroupProject4
         {
             new HomePage().Show();
             Close();
-        }
-
-        private void BtnEditPackage_Click(object sender, EventArgs e)
-        {
-            string packageId = lblPackageID.Text;
-            string packageName = lblPackageName.Text;
-            DateTime packageStartDate = Convert.ToDateTime(lblStartDate.Text);
-            DateTime packageEndDate = Convert.ToDateTime(lblEndDate.Text);
-            string packageDescription = lblDescription.Text;
-            string packageBasePrice = lblBasePrice.Text;
-            string packageCommission = lblCommission.Text;
-
-            EditPackageForm updatePkgForm = new EditPackageForm(packageId, packageName, packageStartDate, packageEndDate, packageDescription, packageBasePrice, packageCommission);
-            updatePkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
-            updatePkgForm.Show();
-        }
-
-        private void UpdatePkgForm_FormClosed(object sender, EventArgs e)
-        {
-            ClearForm();
-        }
-
-        private void BtnDeletePackage_Click(object sender, EventArgs e)
-        {
-            string packageName = lblPackageName.Text;
-            DialogResult deleteClient = MessageBox.Show("Are you sure you want to delete the " + packageName + " package?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (deleteClient == DialogResult.Yes)
-            {
-                int packageID = Convert.ToInt32(lblPackageID.Text);
-                TravelPackageDB deletePackage = new TravelPackageDB();
-                   deletePackage.DeleteTravelPackage(lstViewTravelPackages, packageID);
-
-                ClearForm();
-            }
-        }
-
-        private void ClearForm()
-        {
-            lstViewTravelPackages.Clear();
-            List<Package> refreshPackageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
-            ClearLabels();
-            btnEditPackage.Enabled = false;
-            btnDeletePackage.Enabled = false;
-        }
-
-        private void BtnAddPackage_Click(object sender, EventArgs e)
-        {
-            AddPackageForm addPkgForm = new AddPackageForm();
-            addPkgForm.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
-            addPkgForm.Show();
         }
     }
 }

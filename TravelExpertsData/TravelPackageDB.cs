@@ -143,6 +143,126 @@ namespace TravelExpertsData
             return packageProducts;
         }
 
+        public static List<Package> GetCurrentProdIds(int packageId)
+        {
+            List<Package> currentProductIds = new List<Package>();
+
+            using (SqlConnection con = TravelExpertsDB.GetConnection())
+            {
+                string selectPackProdQuery = @"SELECT ProductId FROM Packages P " +
+                                              "INNER JOIN Packages_Products_Suppliers S ON P.PackageId = S.PackageId " +
+                                              "INNER JOIN Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
+                                              "INNER JOIN Products R ON O.ProductId = R.ProductId " +
+                                              "WHERE R.ProductId = O.ProductId " +
+                                              "AND O.ProductSupplierId = S.ProductSupplierId " +
+                                              "AND S.PackageId = @PackageId";
+
+                using (SqlCommand cmd = new SqlCommand(selectPackProdQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@PackageId", packageId);
+                    con.Open();
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable prod = new DataTable();
+                    adapter.Fill(prod);
+
+                }
+            }
+            return currentProductIds;
+        }
+
+        public static List<Package> ShowAllProducts(ListBox listBox, int packageId)
+        {
+            List<Package> showProducts = new List<Package>();
+
+            using (SqlConnection con = TravelExpertsDB.GetConnection())
+            {
+                string showProdQuery = @"SELECT DISTINCT ProdName FROM Products P " +
+                                        "INNER JOIN Products_Suppliers S ON P.ProductId = S.ProductId " +
+                                        "INNER JOIN Packages_Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
+                                        "WHERE O.PackageId NOT LIKE @PackageId";
+
+                using (SqlCommand cmd = new SqlCommand(showProdQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@PackageId", packageId);
+                    con.Open();
+
+                    if (listBox.ValueMember != null)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable prod = new DataTable();
+                        adapter.Fill(prod);
+
+                        listBox.DisplayMember = "ProdName";
+                        listBox.ValueMember = "ProductId";
+                        listBox.DataSource = prod;
+                    }
+                }
+            }
+            return showProducts;
+        }
+
+        public void GetProductId(string productName, Label label)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            try
+            {
+                string getProductIdQuery = @"SELECT ProductId FROM Products WHERE ProdName = @ProdName";
+
+                SqlCommand sqlCommand = new SqlCommand(getProductIdQuery, con);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@ProdName", productName);
+                    DataTable ProdIdTable = new DataTable();
+                    sqlDataAdapter.Fill(ProdIdTable);
+                    string prodId = Convert.ToString(ProdIdTable.Rows[0]["ProductId"]);
+                    label.Text = prodId;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public int GetSupplierId(int productId)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            try
+            {
+                string getSupplierIdQuery = @"SELECT P.ProductSupplierId FROM Products_Suppliers P " +
+                                             "INNER JOIN Packages_Products_Suppliers S " +
+                                             "ON P.ProductSupplierId = S.ProductSupplierId " +
+                                             "WHERE P.ProductId = @ProductId";
+
+                SqlCommand sqlCommand = new SqlCommand(getSupplierIdQuery, con);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using (sqlDataAdapter)
+                {
+                    sqlCommand.Parameters.AddWithValue("@ProductId", productId);
+                    DataTable ProdIdTable = new DataTable();
+                    sqlDataAdapter.Fill(ProdIdTable);
+                    int prodSupplierId = Convert.ToInt32(ProdIdTable.Rows[0]["ProductSupplierId"]);
+                    return prodSupplierId;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public void EditTravelPackage(int packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -202,6 +322,30 @@ namespace TravelExpertsData
             }
         }
 
+        public void AddPackageToProd(int packageId, int prodSupplierId)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            try
+            {
+                string insertPackToProdQuery = @"INSERT INTO Packages_Products_Suppliers (PackageId, ProductSupplierId) " +
+                                                "VALUES (@PackageId, @ProductSupplierId)";
+
+                SqlCommand sqlCommand = new SqlCommand(insertPackToProdQuery, con);
+                con.Open();
+                sqlCommand.Parameters.AddWithValue("@PackageId", packageId);
+                sqlCommand.Parameters.AddWithValue("@ProductSupplierId", prodSupplierId);
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public void DeleteTravelPackage(ListView packageList, int packageID)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -224,7 +368,39 @@ namespace TravelExpertsData
             }
         }
 
-        
+        public void RemovePackageProduct(int productId, int packageId)
+        {
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            try
+            {
+                string removeProdQuery = @"DELETE FROM Packages_Products_Suppliers " +
+                                          "FROM Packages_Products_Suppliers " + 
+                                          "LEFT OUTER JOIN Products_Suppliers " +
+                                          "ON Packages_Products_Suppliers.ProductSupplierId = Products_Suppliers.ProductSupplierId " +
+                                          "WHERE ProductId = @ProductId AND PackageId = @PackageId";
+
+                SqlCommand sqlCommand = new SqlCommand(removeProdQuery, con);
+                con.Open();
+
+                sqlCommand.Parameters.AddWithValue("@ProductId", productId);
+                sqlCommand.Parameters.AddWithValue("@PackageId", packageId);
+
+                sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+       
+
+
+
 
     }
 }
