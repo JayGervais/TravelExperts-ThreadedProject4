@@ -215,7 +215,7 @@
             // lblPackageID
             // 
             this.lblPackageID.AutoSize = true;
-            this.lblPackageID.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblPackageID.ForeColor = System.Drawing.SystemColors.Control;
             this.lblPackageID.Location = new System.Drawing.Point(109, 285);
             this.lblPackageID.Name = "lblPackageID";
             this.lblPackageID.Size = new System.Drawing.Size(0, 13);

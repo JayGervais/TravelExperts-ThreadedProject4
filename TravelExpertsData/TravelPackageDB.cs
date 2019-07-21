@@ -180,7 +180,8 @@ namespace TravelExpertsData
                 string showProdQuery = @"SELECT DISTINCT ProdName FROM Products P " +
                                         "INNER JOIN Products_Suppliers S ON P.ProductId = S.ProductId " +
                                         "INNER JOIN Packages_Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
-                                        "WHERE O.PackageId NOT LIKE @PackageId";
+                                        "INNER JOIN Packages G ON G.PackageId = O.PackageId " + 
+                                        "WHERE O.PackageId NOT LIKE @PackageId AND G.PackageId NOT LIKE @PackageId";
 
                 using (SqlCommand cmd = new SqlCommand(showProdQuery, con))
                 {
