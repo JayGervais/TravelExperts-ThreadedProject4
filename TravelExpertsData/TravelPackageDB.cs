@@ -15,9 +15,9 @@ namespace TravelExpertsData
     public class TravelPackageDB
     {
 
-        public static List<Package> GetPackages(ListView tableView)
+        public static List<PackageHC> GetPackages(ListView tableView)
         {
-            List<Package> packages = new List<Package>();
+            List<PackageHC> packages = new List<PackageHC>();
 
             using (SqlConnection con = TravelExpertsDB.GetConnection())
             {
@@ -109,9 +109,9 @@ namespace TravelExpertsData
             }
         }
 
-        public static List<Package> GetPackageProducts(ListBox listBox, int packageId)
+        public static List<PackageHC> GetPackageProducts(ListBox listBox, int packageId)
         {
-            List<Package> packageProducts = new List<Package>();
+            List<PackageHC> packageProducts = new List<PackageHC>();
 
             using (SqlConnection con = TravelExpertsDB.GetConnection())
             {

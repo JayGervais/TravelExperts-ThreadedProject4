@@ -22,7 +22,7 @@ namespace TravelExperts_GroupProject4
 
         private void AddPackageForm_Load(object sender, EventArgs e)
         {
-            List<Package> packageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
+            List<PackageHC> packageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
             ClearLabels();
             btnEditPackage.Enabled = false;
             btnDeletePackage.Enabled = false;
@@ -39,7 +39,7 @@ namespace TravelExperts_GroupProject4
             if (lstProducts.Items != null)
             {
                 int packageId = Convert.ToInt32(lblPackageID.Text);
-                List<Package> packageProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+                List<PackageHC> packageProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
             } 
         }
 
@@ -112,7 +112,7 @@ namespace TravelExperts_GroupProject4
         private void ClearForm()
         {
             lstViewTravelPackages.Clear();
-            List<Package> refreshPackageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
+            List<PackageHC> refreshPackageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
             ClearLabels();
             btnEditPackage.Enabled = false;
             btnDeletePackage.Enabled = false;
