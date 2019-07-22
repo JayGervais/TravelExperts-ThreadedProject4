@@ -12,7 +12,8 @@ namespace TravelExpertsData
         public static SqlConnection GetConnection()
         {
             //string connectionString = @"Data Source=localhost\SAITSQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";
-            string connectionString = @"Data Source=localhost\SAIT;Initial Catalog=TravelExperts;Integrated Security=True";
+            //string connectionString = @"Data Source=localhost\SAIT;Initial Catalog=TravelExperts;Integrated Security=True";
+            string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";
             SqlConnection con = new SqlConnection(connectionString);
             return con;
         }

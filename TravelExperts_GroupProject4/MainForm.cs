@@ -22,5 +22,11 @@ namespace TravelExperts_GroupProject4
             new TravelPackageForm().Show();
             Hide();
         }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            SupplierForm supplierListForm = new SupplierForm();
+            supplierListForm.Show();
+        }
     }
 }
