@@ -40,6 +40,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtPackageCount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtTotalNumSuppliers = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtEngagedSuppliers = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtTotalNumProducts = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtEngagedProducts = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnPackages
@@ -140,11 +148,87 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Total number of Packages:";
             // 
+            // txtTotalNumSuppliers
+            // 
+            this.txtTotalNumSuppliers.Enabled = false;
+            this.txtTotalNumSuppliers.Location = new System.Drawing.Point(388, 199);
+            this.txtTotalNumSuppliers.Name = "txtTotalNumSuppliers";
+            this.txtTotalNumSuppliers.Size = new System.Drawing.Size(69, 20);
+            this.txtTotalNumSuppliers.TabIndex = 24;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(246, 202);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Total number of Suppliers:";
+            // 
+            // txtEngagedSuppliers
+            // 
+            this.txtEngagedSuppliers.Enabled = false;
+            this.txtEngagedSuppliers.Location = new System.Drawing.Point(155, 199);
+            this.txtEngagedSuppliers.Name = "txtEngagedSuppliers";
+            this.txtEngagedSuppliers.Size = new System.Drawing.Size(69, 20);
+            this.txtEngagedSuppliers.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 202);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(99, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Engaged Suppliers:";
+            // 
+            // txtTotalNumProducts
+            // 
+            this.txtTotalNumProducts.Enabled = false;
+            this.txtTotalNumProducts.Location = new System.Drawing.Point(388, 225);
+            this.txtTotalNumProducts.Name = "txtTotalNumProducts";
+            this.txtTotalNumProducts.Size = new System.Drawing.Size(69, 20);
+            this.txtTotalNumProducts.TabIndex = 28;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(246, 228);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(129, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Total number of Products:";
+            // 
+            // txtEngagedProducts
+            // 
+            this.txtEngagedProducts.Enabled = false;
+            this.txtEngagedProducts.Location = new System.Drawing.Point(155, 225);
+            this.txtEngagedProducts.Name = "txtEngagedProducts";
+            this.txtEngagedProducts.Size = new System.Drawing.Size(69, 20);
+            this.txtEngagedProducts.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 228);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(119, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Products in current use:";
+            // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtTotalNumProducts);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtEngagedProducts);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtTotalNumSuppliers);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtEngagedSuppliers);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtMaxBasePrice);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtMinBasePrice);
@@ -178,6 +262,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPackageCount;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtTotalNumSuppliers;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtEngagedSuppliers;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtTotalNumProducts;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtEngagedProducts;
+        private System.Windows.Forms.Label label9;
     }
 }
 
