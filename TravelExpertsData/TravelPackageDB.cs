@@ -109,19 +109,17 @@ namespace TravelExpertsData
             }
         }
 
+        // show products associated with selected package
         public static List<Package> GetPackageProducts(ListBox listBox, int packageId)
         {
             List<Package> packageProducts = new List<Package>();
-
             using (SqlConnection con = TravelExpertsDB.GetConnection())
             {
                 string selectPackProdQuery = @"SELECT ProdName FROM Packages P " +
                                               "INNER JOIN Packages_Products_Suppliers S ON P.PackageId = S.PackageId " +
                                               "INNER JOIN Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
                                               "INNER JOIN Products R ON O.ProductId = R.ProductId " +
-                                              "WHERE R.ProductId = O.ProductId " +
-                                              "AND O.ProductSupplierId = S.ProductSupplierId " +
-                                              "AND S.PackageId = @PackageId";
+                                              "WHERE S.PackageId = @PackageId";
 
                 using (SqlCommand cmd = new SqlCommand(selectPackProdQuery, con))
                 {
@@ -143,10 +141,35 @@ namespace TravelExpertsData
             return packageProducts;
         }
 
+
+
+
+        public static List<Package> PackageList(int packageId)
+        {
+            List<Package> listProducts = new List<Package>();
+            using (SqlConnection con = TravelExpertsDB.GetConnection())
+            {
+                string selectPackProdQuery = @"SELECT ProdName FROM Packages P " +
+                                              "INNER JOIN Packages_Products_Suppliers S ON P.PackageId = S.PackageId " +
+                                              "INNER JOIN Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
+                                              "INNER JOIN Products R ON O.ProductId = R.ProductId " +
+                                              "WHERE S.PackageId = @PackageId";
+
+                using (SqlCommand cmd = new SqlCommand(selectPackProdQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@PackageId", packageId);
+                    con.Open();
+                }
+            }
+            return listProducts;
+        }
+
+
+
+
         public static List<Package> GetCurrentProdIds(int packageId)
         {
             List<Package> currentProductIds = new List<Package>();
-
             using (SqlConnection con = TravelExpertsDB.GetConnection())
             {
                 string selectPackProdQuery = @"SELECT ProductId FROM Packages P " +
@@ -165,23 +188,24 @@ namespace TravelExpertsData
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable prod = new DataTable();
                     adapter.Fill(prod);
-
                 }
             }
             return currentProductIds;
         }
 
+        // get available products not added to the package
         public static List<Package> ShowAllProducts(ListBox listBox, int packageId)
         {
             List<Package> showProducts = new List<Package>();
-
             using (SqlConnection con = TravelExpertsDB.GetConnection())
             {
                 string showProdQuery = @"SELECT DISTINCT ProdName FROM Products P " +
                                         "INNER JOIN Products_Suppliers S ON P.ProductId = S.ProductId " +
-                                        "INNER JOIN Packages_Products_Suppliers O ON S.ProductSupplierId = O.ProductSupplierId " +
-                                        "INNER JOIN Packages G ON G.PackageId = O.PackageId " + 
-                                        "WHERE O.PackageId NOT LIKE @PackageId AND G.PackageId NOT LIKE @PackageId";
+                                        "INNER JOIN Packages_Products_Suppliers D ON S.ProductSupplierId = D.ProductSupplierId " +
+                                        "WHERE P.ProductId = S.ProductId AND S.ProductSupplierId = D.ProductSupplierId AND P.ProductId " +
+                                        "NOT IN (SELECT ProductId FROM Products_Suppliers S " +
+                                        "INNER JOIN Packages_Products_Suppliers D ON S.ProductSupplierId = D.ProductSupplierId " +
+                                        "AND D.PackageId = @PackageId)";
 
                 using (SqlCommand cmd = new SqlCommand(showProdQuery, con))
                 {
