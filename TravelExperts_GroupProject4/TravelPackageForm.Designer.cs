@@ -75,6 +75,8 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
+            this.labelDate.BackColor = System.Drawing.Color.Transparent;
+            this.labelDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelDate.Location = new System.Drawing.Point(391, 285);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(55, 13);
@@ -84,6 +86,8 @@
             // labelEnd
             // 
             this.labelEnd.AutoSize = true;
+            this.labelEnd.BackColor = System.Drawing.Color.Transparent;
+            this.labelEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelEnd.Location = new System.Drawing.Point(508, 285);
             this.labelEnd.Name = "labelEnd";
             this.labelEnd.Size = new System.Drawing.Size(52, 13);
@@ -102,6 +106,8 @@
             // labelBase
             // 
             this.labelBase.AutoSize = true;
+            this.labelBase.BackColor = System.Drawing.Color.Transparent;
+            this.labelBase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelBase.Location = new System.Drawing.Point(391, 347);
             this.labelBase.Name = "labelBase";
             this.labelBase.Size = new System.Drawing.Size(58, 13);
@@ -111,6 +117,8 @@
             // labelComm
             // 
             this.labelComm.AutoSize = true;
+            this.labelComm.BackColor = System.Drawing.Color.Transparent;
+            this.labelComm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelComm.Location = new System.Drawing.Point(508, 347);
             this.labelComm.Name = "labelComm";
             this.labelComm.Size = new System.Drawing.Size(62, 13);
@@ -129,6 +137,8 @@
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = true;
+            this.lblStartDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblStartDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStartDate.Location = new System.Drawing.Point(390, 305);
             this.lblStartDate.Name = "lblStartDate";
@@ -138,6 +148,8 @@
             // lblEndDate
             // 
             this.lblEndDate.AutoSize = true;
+            this.lblEndDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblEndDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEndDate.Location = new System.Drawing.Point(507, 305);
             this.lblEndDate.Name = "lblEndDate";
@@ -156,6 +168,8 @@
             // lblBasePrice
             // 
             this.lblBasePrice.AutoSize = true;
+            this.lblBasePrice.BackColor = System.Drawing.Color.Transparent;
+            this.lblBasePrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBasePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBasePrice.Location = new System.Drawing.Point(390, 365);
             this.lblBasePrice.Name = "lblBasePrice";
@@ -165,6 +179,8 @@
             // lblCommission
             // 
             this.lblCommission.AutoSize = true;
+            this.lblCommission.BackColor = System.Drawing.Color.Transparent;
+            this.lblCommission.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCommission.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCommission.Location = new System.Drawing.Point(507, 365);
             this.lblCommission.Name = "lblCommission";
@@ -173,7 +189,7 @@
             // 
             // btnGoBack
             // 
-            this.btnGoBack.Location = new System.Drawing.Point(25, 405);
+            this.btnGoBack.Location = new System.Drawing.Point(12, 405);
             this.btnGoBack.Name = "btnGoBack";
             this.btnGoBack.Size = new System.Drawing.Size(145, 26);
             this.btnGoBack.TabIndex = 13;
@@ -234,6 +250,7 @@
             // 
             // lstProducts
             // 
+            this.lstProducts.BackColor = System.Drawing.SystemColors.Window;
             this.lstProducts.FormattingEnabled = true;
             this.lstProducts.Location = new System.Drawing.Point(643, 305);
             this.lstProducts.Name = "lstProducts";
@@ -264,6 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnEditProducts);
             this.Controls.Add(this.lblPackages);

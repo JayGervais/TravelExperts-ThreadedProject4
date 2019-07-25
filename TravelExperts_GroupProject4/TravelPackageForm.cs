@@ -58,6 +58,9 @@ namespace TravelExperts_GroupProject4
         {
             int packageId = Convert.ToInt32(lblPackageID.Text);
             AddProductForm addProdToPack = new AddProductForm(packageId, lblPackageName.Text);
+
+            addProdToPack.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
+
             addProdToPack.Show();
         }
 
@@ -118,6 +121,7 @@ namespace TravelExperts_GroupProject4
             lblBasePrice.Text = "";
             labelComm.Text = "";
             lblCommission.Text = "";
+            lstProducts.Enabled = false;
         }
 
         private void ShowLabels()
