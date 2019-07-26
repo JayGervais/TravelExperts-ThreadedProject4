@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TravelExpertsData
 {
@@ -16,6 +17,11 @@ namespace TravelExpertsData
             string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";
             SqlConnection con = new SqlConnection(connectionString);
             return con;
+        }
+
+        internal static SqlConnection GetConnection(ListView listView, object supplierList, int v, object supplierId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

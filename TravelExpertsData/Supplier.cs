@@ -9,6 +9,7 @@ namespace TravelExpertsData
     public class Supplier
     {
         public int SupplierID { get; set; }
-        public char SupplierName { get; set; }
+        public string SupplierName { get; set; }
     }
 }
+
