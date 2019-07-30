@@ -8,6 +8,9 @@ namespace TravelExpertsData
 {
     public class Product
     {
+        /// <summary>
+        /// Product constructor by Jay Gervais
+        /// </summary>
         public int ProductId { get; set; }
         public string ProdName { get; set; }
     }

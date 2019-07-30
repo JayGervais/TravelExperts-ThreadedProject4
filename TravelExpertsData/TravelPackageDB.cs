@@ -14,7 +14,7 @@ namespace TravelExpertsData
 {
     public class TravelPackageDB
     {
-
+        // list all packages
         public static List<Package> GetPackages(ListView tableView)
         {
             List<Package> packages = new List<Package>();
@@ -61,6 +61,7 @@ namespace TravelExpertsData
             return packages;
         }
 
+        // show details from selected package
         public void ShowSelectedOrder(ListView listview, Label packageId, Label packageName, Label packageStartDate, Label packageEndDate, Label packageDescription, Label packageBasePrice, Label packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -141,9 +142,7 @@ namespace TravelExpertsData
             return packageProducts;
         }
 
-
-
-
+        // list products in package
         public static List<Package> PackageList(int packageId)
         {
             List<Package> listProducts = new List<Package>();
@@ -164,9 +163,7 @@ namespace TravelExpertsData
             return listProducts;
         }
 
-
-
-
+        // gets ID of selected package
         public static List<Package> GetCurrentProdIds(int packageId)
         {
             List<Package> currentProductIds = new List<Package>();
@@ -227,6 +224,7 @@ namespace TravelExpertsData
             return showProducts;
         }
 
+        // gets ID of selected product
         public void GetProductId(string productName, Label label)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -256,6 +254,7 @@ namespace TravelExpertsData
             }
         }
 
+        // gets product supplier id from product selection
         public int GetSupplierId(int productId)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -288,6 +287,7 @@ namespace TravelExpertsData
             }
         }
 
+        // saves changes to travel packages after editing
         public void EditTravelPackage(int packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -318,6 +318,7 @@ namespace TravelExpertsData
             }
         }
 
+        // adds new travel package to database
         public void AddTravelPackage(string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, double packageBasePrice, double packageCommission)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -347,6 +348,7 @@ namespace TravelExpertsData
             }
         }
 
+        // adds products to package
         public void AddPackageToProd(int packageId, int prodSupplierId)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -371,6 +373,7 @@ namespace TravelExpertsData
             }
         }
 
+        // delete travel package
         public void DeleteTravelPackage(ListView packageList, int packageID)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();
@@ -393,6 +396,7 @@ namespace TravelExpertsData
             }
         }
 
+        // remove product from travel package
         public void RemovePackageProduct(int productId, int packageId)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();

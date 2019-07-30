@@ -9,6 +9,9 @@ namespace TravelExpertsData
 {
     public class TravelExpertsDB
     {
+        /// 
+        /// Travel Experts database connection string
+        /// 
         public static SqlConnection GetConnection()
         {
             string connectionString = @"Data Source=localhost\SAITSQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";

@@ -16,6 +16,7 @@ namespace TravelExperts_GroupProject4
 {
     public partial class EditPackageForm : Form
     {
+        // gets all items within selected package to show in form
         public EditPackageForm(string packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, string packageBasePrice, string packageCommission)
         {
             InitializeComponent();
@@ -29,11 +30,13 @@ namespace TravelExperts_GroupProject4
             txtCommission.Text = packageCommission;
         }
 
+        // cancel and close form
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        // validate all changes and save form
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (Validator.IsNotEmpty(txtPackageName, "Package Name") &&

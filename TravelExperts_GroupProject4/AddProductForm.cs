@@ -15,6 +15,7 @@ namespace TravelExperts_GroupProject4
 {
     public partial class AddProductForm : Form
     {
+        // lists all products in package and available products not yet added
         public AddProductForm(int packageId, string packageName)
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace TravelExperts_GroupProject4
             }
         }
 
+        // remove product from package
         private void BtnRemoveProduct_Click(object sender, EventArgs e)
         {
             int packageId = Convert.ToInt32(lblPackageId.Text);
@@ -39,6 +41,7 @@ namespace TravelExperts_GroupProject4
             List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
         }
 
+        // add product to package
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             int packageId = Convert.ToInt32(lblPackageId.Text);
@@ -50,18 +53,21 @@ namespace TravelExperts_GroupProject4
             List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
         }
 
+        // selects the index of the selected product added to package
         private void LstProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             TravelPackageDB getProdId = new TravelPackageDB();
             getProdId.GetProductId(lstProducts.Text, lblProductId);
         }
 
+        // selects index of product not added to package
         private void LstAllProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             TravelPackageDB getProdId = new TravelPackageDB();
             getProdId.GetProductId(lstAllProducts.Text, lblListNewProd);
         }
 
+        // cancel and close form
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

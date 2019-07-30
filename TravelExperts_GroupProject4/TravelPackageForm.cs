@@ -20,6 +20,7 @@ namespace TravelExperts_GroupProject4
             InitializeComponent();
         }
 
+        // lists all packages on load and disables buttons before selection
         private void AddPackageForm_Load(object sender, EventArgs e)
         {
             List<Package> packageView = TravelPackageDB.GetPackages(lstViewTravelPackages);
@@ -30,6 +31,7 @@ namespace TravelExperts_GroupProject4
             btnEditProducts.Enabled = false;
         }
 
+        // shows details of selected package and enables buttons for editing
         private void LstViewTravelPackages_SelectedIndexChanged(object sender, EventArgs e)
         {
             TravelPackageDB packageDetails = new TravelPackageDB();
@@ -47,6 +49,7 @@ namespace TravelExperts_GroupProject4
             } 
         }
 
+        // opens form to add new package and creates event handler to clear and reset information after close
         private void BtnAddPackage_Click(object sender, EventArgs e)
         {
             AddPackageForm addPkgForm = new AddPackageForm();
@@ -54,16 +57,16 @@ namespace TravelExperts_GroupProject4
             addPkgForm.Show();
         }
 
+        // opens form to add new product to package and creates event handler to clear and reset information after close
         private void BtnAddProduct_Click(object sender, EventArgs e)
         {
             int packageId = Convert.ToInt32(lblPackageID.Text);
             AddProductForm addProdToPack = new AddProductForm(packageId, lblPackageName.Text);
-
             addProdToPack.FormClosed += new FormClosedEventHandler(UpdatePkgForm_FormClosed);
-
             addProdToPack.Show();
         }
 
+        // opens form to edit package and adds information to form
         private void BtnEditPackage_Click(object sender, EventArgs e)
         {
             string packageId = lblPackageID.Text;
@@ -79,6 +82,7 @@ namespace TravelExperts_GroupProject4
             updatePkgForm.Show();
         }
 
+        // delete package with dialog box
         private void BtnDeletePackage_Click(object sender, EventArgs e)
         {
             string packageName = lblPackageName.Text;
@@ -88,16 +92,17 @@ namespace TravelExperts_GroupProject4
                 int packageID = Convert.ToInt32(lblPackageID.Text);
                 TravelPackageDB deletePackage = new TravelPackageDB();
                 deletePackage.DeleteTravelPackage(lstViewTravelPackages, packageID);
-
                 ClearForm();
             }
         }
 
+        // clears main form after update form is closed
         private void UpdatePkgForm_FormClosed(object sender, EventArgs e)
         {
             ClearForm();
         }
 
+        // clear form function
         private void ClearForm()
         {
             lstViewTravelPackages.Clear();
@@ -107,6 +112,7 @@ namespace TravelExperts_GroupProject4
             btnDeletePackage.Enabled = false;
         }
 
+        // clear labels function
         private void ClearLabels()
         {
             labelName.Text = "";
@@ -123,7 +129,8 @@ namespace TravelExperts_GroupProject4
             lblCommission.Text = "";
             lstProducts.Enabled = false;
         }
-
+        
+        // show labels function
         private void ShowLabels()
         {
             labelName.Text = "Package Name";
@@ -134,6 +141,7 @@ namespace TravelExperts_GroupProject4
             labelComm.Text = "Agency Commission";
         }
 
+        // close form and open home page
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
             new HomePage().Show();

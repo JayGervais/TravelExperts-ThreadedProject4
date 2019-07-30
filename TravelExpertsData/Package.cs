@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TravelExpertsData
 {
+    /// <summary>
+    /// Package constructor by Jay Gervais
+    /// </summary>
     public class Package
     {
         public int PackageID { get; set; }

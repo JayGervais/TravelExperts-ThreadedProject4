@@ -21,11 +21,13 @@ namespace TravelExperts_GroupProject4
             InitializeComponent();
         }
 
+        // close form and cancel changes
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // validate changes and save form
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (Validator.IsNotEmpty(txtPackageName, "Package Name") &&
