@@ -16,6 +16,8 @@ namespace TravelExperts_GroupProject4
         List<PackageHC> packageList;  // List of Packages
         List<Supplier> supplierList, engagedSuppliers;
         List<Product> productList, engagedProducts;
+        bool subTotalChecked;
+
         public HomePage()
         {
             InitializeComponent();
@@ -27,26 +29,73 @@ namespace TravelExperts_GroupProject4
             Hide();
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            subTotalChecked = checkBox1.Checked;
+
+            if (subTotalChecked)
+            {
+                lblCostMin.Text = "Lowest Cost subtotal: ";
+                lblCostMax.Text = "Highest Cost subtotal: ";
+                GetHomePageInfo();
+            }
+            else
+            {                
+                lblCostMin.Text = "Lowest Base Price: ";
+                lblCostMax.Text = "Highest Base Price: ";
+                GetHomePageInfo();
+            }
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void HomePage_Load(object sender, EventArgs e)
         {
-            GetHomePageInfo();            
+            GetHomePageInfo();
+            lblCostMin.Text = "Lowest Base Price: ";
+            lblCostMax.Text = "Highest Base Price: ";
         }
 
         private void GetHomePageInfo()
         {
             List<int> duration = new List<int>();
+            List<decimal> subCost = new List<decimal>();
             int rows, rowDuration, minDuration, maxDuration;
-            //int rowDuration;
-            decimal MinBasePrice, MaxBasePrice;
+            decimal minBasePrice, maxBasePrice, rowSubCost;
+            subTotalChecked = checkBox1.Checked;
 
             packageList = PackageDB.GetPackages();
             rows = packageList.Count;
             txtPackageCount.Text = rows.ToString();
 
-            MinBasePrice = packageList.Min(r => r.PkgBasePrice);
-            txtMinBasePrice.Text = MinBasePrice.ToString("c");
-            MaxBasePrice = packageList.Max(r => r.PkgBasePrice);
-            txtMaxBasePrice.Text = MaxBasePrice.ToString("c");
+            if (subTotalChecked)
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    rowSubCost = (decimal)packageList[i].PkgBasePrice + (decimal)packageList[i].PkgAgencyCommission;
+                    subCost.Add(rowSubCost);
+                }
+
+                minBasePrice = subCost.Min();
+                txtMinBasePrice.Text = minBasePrice.ToString("c");
+                maxBasePrice = subCost.Max();
+                txtMaxBasePrice.Text = maxBasePrice.ToString("c");
+            }
+            else
+            {
+                minBasePrice = packageList.Min(r => r.PkgBasePrice);
+                txtMinBasePrice.Text = minBasePrice.ToString("c");
+                maxBasePrice = packageList.Max(r => r.PkgBasePrice);
+                txtMaxBasePrice.Text = maxBasePrice.ToString("c");
+            }
 
             for (int i = 0; i < rows; i++)
             {
