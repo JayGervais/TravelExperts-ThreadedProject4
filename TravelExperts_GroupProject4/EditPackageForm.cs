@@ -20,7 +20,6 @@ namespace TravelExperts_GroupProject4
         public EditPackageForm(string packageId, string packageName, DateTime packageStartDate, DateTime packageEndDate, string packageDescription, string packageBasePrice, string packageCommission)
         {
             InitializeComponent();
-
             txtPackageID.Text = packageId;
             txtPackageName.Text = packageName;
             dateStart.Value = packageStartDate;

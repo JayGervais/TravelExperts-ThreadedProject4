@@ -39,6 +39,7 @@ namespace TravelExperts_GroupProject4
             TravelPackageDB removeProduct = new TravelPackageDB();
             removeProduct.RemovePackageProduct(productId, packageId);
             List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+            List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
         }
 
         // add product to package
@@ -51,6 +52,8 @@ namespace TravelExperts_GroupProject4
             int supplierId = getProdSupplierId.GetSupplierId(productId);
             getProdSupplierId.AddPackageToProd(Convert.ToInt32(lblPackageId.Text), supplierId);
             List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+            List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
+
         }
 
         // selects the index of the selected product added to package
