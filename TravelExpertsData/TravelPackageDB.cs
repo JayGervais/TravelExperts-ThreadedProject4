@@ -380,10 +380,19 @@ namespace TravelExpertsData
 
             try
             {
+                // remove associated products
+                string removeProdQuery = @"DELETE FROM Packages_Products_Suppliers WHERE PackageId = @PackageId";
+                SqlCommand sqlRemoveProdCommand = new SqlCommand(removeProdQuery, con);
+                sqlRemoveProdCommand.Parameters.AddWithValue("@PackageId", packageID);
+
+                // delete package
                 string deletePkgQuery = @"DELETE FROM Packages WHERE PackageID = @PackageId";
                 SqlCommand sqlCommand = new SqlCommand(deletePkgQuery, con);
-                con.Open();
                 sqlCommand.Parameters.AddWithValue("@PackageId", packageID);
+
+                con.Open();
+                
+                sqlRemoveProdCommand.ExecuteScalar();
                 sqlCommand.ExecuteScalar();
             }
             catch (Exception ex)

@@ -33,27 +33,40 @@ namespace TravelExperts_GroupProject4
         // remove product from package
         private void BtnRemoveProduct_Click(object sender, EventArgs e)
         {
-            int packageId = Convert.ToInt32(lblPackageId.Text);
-            int productId = Convert.ToInt32(lblProductId.Text);
+            if (lstProducts.SelectedItem == null)
+            {
+                MessageBox.Show("A product must be selected to remove");
+            }
+            else
+            {
+                int packageId = Convert.ToInt32(lblPackageId.Text);
+                int productId = Convert.ToInt32(lblProductId.Text);
 
-            TravelPackageDB removeProduct = new TravelPackageDB();
-            removeProduct.RemovePackageProduct(productId, packageId);
-            List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
-            List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
+                TravelPackageDB removeProduct = new TravelPackageDB();
+                removeProduct.RemovePackageProduct(productId, packageId);
+                List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+                List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
+            }  
         }
 
         // add product to package
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            int packageId = Convert.ToInt32(lblPackageId.Text);
-            int productId = Convert.ToInt32(lblListNewProd.Text);
+            if(lstAllProducts.SelectedItem == null)
+            {
+                MessageBox.Show("A product must be selected to add");
+            }
+            else
+            {
+                int packageId = Convert.ToInt32(lblPackageId.Text);
+                int productId = Convert.ToInt32(lblListNewProd.Text);
 
-            TravelPackageDB getProdSupplierId = new TravelPackageDB();
-            int supplierId = getProdSupplierId.GetSupplierId(productId);
-            getProdSupplierId.AddPackageToProd(Convert.ToInt32(lblPackageId.Text), supplierId);
-            List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
-            List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
-
+                TravelPackageDB getProdSupplierId = new TravelPackageDB();
+                int supplierId = getProdSupplierId.GetSupplierId(productId);
+                getProdSupplierId.AddPackageToProd(Convert.ToInt32(lblPackageId.Text), supplierId);
+                List<Package> refreshProducts = TravelPackageDB.GetPackageProducts(lstProducts, packageId);
+                List<Package> showProducts = TravelPackageDB.ShowAllProducts(lstAllProducts, packageId);
+            }
         }
 
         // selects the index of the selected product added to package

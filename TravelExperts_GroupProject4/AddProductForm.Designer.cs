@@ -39,7 +39,6 @@
             this.lstAllProducts = new System.Windows.Forms.ListBox();
             this.lblAddProd = new System.Windows.Forms.Label();
             this.btnRemoveProduct = new System.Windows.Forms.Button();
-            this.btnAddNewProduct = new System.Windows.Forms.Button();
             this.lblPackageName = new System.Windows.Forms.Label();
             this.lblPackageId = new System.Windows.Forms.Label();
             this.lblProductId = new System.Windows.Forms.Label();
@@ -144,16 +143,6 @@
             this.btnRemoveProduct.UseVisualStyleBackColor = true;
             this.btnRemoveProduct.Click += new System.EventHandler(this.BtnRemoveProduct_Click);
             // 
-            // btnAddNewProduct
-            // 
-            this.btnAddNewProduct.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddNewProduct.Location = new System.Drawing.Point(12, 499);
-            this.btnAddNewProduct.Name = "btnAddNewProduct";
-            this.btnAddNewProduct.Size = new System.Drawing.Size(116, 32);
-            this.btnAddNewProduct.TabIndex = 66;
-            this.btnAddNewProduct.Text = "Add New Product";
-            this.btnAddNewProduct.UseVisualStyleBackColor = true;
-            // 
             // lblPackageName
             // 
             this.lblPackageName.AutoSize = true;
@@ -209,7 +198,6 @@
             this.Controls.Add(this.lblProductId);
             this.Controls.Add(this.lblPackageId);
             this.Controls.Add(this.lblPackageName);
-            this.Controls.Add(this.btnAddNewProduct);
             this.Controls.Add(this.btnRemoveProduct);
             this.Controls.Add(this.lblAddProd);
             this.Controls.Add(this.lstAllProducts);
@@ -241,7 +229,6 @@
         private System.Windows.Forms.ListBox lstAllProducts;
         private System.Windows.Forms.Label lblAddProd;
         private System.Windows.Forms.Button btnRemoveProduct;
-        private System.Windows.Forms.Button btnAddNewProduct;
         private System.Windows.Forms.Label lblPackageName;
         private System.Windows.Forms.Label lblPackageId;
         private System.Windows.Forms.Label lblProductId;
